@@ -28,8 +28,11 @@ export default function ExerciseLogRow({
   const [lastLog, setLastLog] = useState<WorkoutLog | null>(null);
 
   useEffect(() => {
-    const prev = getLastLogForExercise(workoutDayId, exercise.number, date);
-    setLastLog(prev);
+    let cancelled = false;
+    getLastLogForExercise(workoutDayId, exercise.number, date).then((prev) => {
+      if (!cancelled) setLastLog(prev);
+    });
+    return () => { cancelled = true; };
   }, [workoutDayId, exercise.number, date]);
 
   useEffect(() => {

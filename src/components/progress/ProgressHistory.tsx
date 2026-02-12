@@ -17,7 +17,11 @@ export default function ProgressHistory({
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    setSessions(getRecentLogs(workoutDayId, 4));
+    let cancelled = false;
+    getRecentLogs(workoutDayId, 4).then((data) => {
+      if (!cancelled) setSessions(data);
+    });
+    return () => { cancelled = true; };
   }, [workoutDayId]);
 
   if (sessions.length === 0) {

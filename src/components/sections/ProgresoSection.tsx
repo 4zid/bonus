@@ -42,7 +42,11 @@ export default function ProgresoSection() {
   const workout = workoutDays[dayTabs[activeTab].dayIdx];
 
   useEffect(() => {
-    setLogs(getLogsForDate(workout.id, date));
+    let cancelled = false;
+    getLogsForDate(workout.id, date).then((data) => {
+      if (!cancelled) setLogs(data);
+    });
+    return () => { cancelled = true; };
   }, [workout.id, date, refreshKey]);
 
   const totalExercises = useMemo(
