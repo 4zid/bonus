@@ -1,27 +1,27 @@
 import type { WorkoutLog } from "./types";
+import {
+  localGetLogsForDate,
+  localSaveLog,
+  localGetRecentLogs,
+  localGetLastLogForExercise,
+} from "./local-storage";
 
 export async function getLogsForDate(
   dayId: string,
   date: string,
 ): Promise<WorkoutLog[]> {
-  const res = await fetch(`/api/logs?dayId=${dayId}&date=${date}`);
-  return res.json();
+  return localGetLogsForDate(dayId, date);
 }
 
 export async function saveLog(log: WorkoutLog): Promise<void> {
-  await fetch("/api/logs", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(log),
-  });
+  localSaveLog(log);
 }
 
 export async function getRecentLogs(
   dayId: string,
   limit = 4,
 ): Promise<{ date: string; logs: WorkoutLog[] }[]> {
-  const res = await fetch(`/api/logs/recent?dayId=${dayId}&limit=${limit}`);
-  return res.json();
+  return localGetRecentLogs(dayId, limit);
 }
 
 export async function getLastLogForExercise(
@@ -29,8 +29,5 @@ export async function getLastLogForExercise(
   exerciseNumber: string,
   beforeDate: string,
 ): Promise<WorkoutLog | null> {
-  const res = await fetch(
-    `/api/logs/last?dayId=${dayId}&exerciseNumber=${exerciseNumber}&beforeDate=${beforeDate}`,
-  );
-  return res.json();
+  return localGetLastLogForExercise(dayId, exerciseNumber, beforeDate);
 }

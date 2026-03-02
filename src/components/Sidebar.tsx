@@ -55,9 +55,29 @@ export default function Sidebar({ active, onChange }: SidebarProps) {
         </ul>
       </nav>
 
-      <div className="px-6 py-5">
+      <div className="px-6 py-5 space-y-2">
+        <div className="flex gap-3">
+          <a
+            href="/privacy"
+            className="font-mono text-[10px] text-[#bbb] transition-colors hover:text-[#888]"
+          >
+            Privacidad
+          </a>
+          <a
+            href="/terms"
+            className="font-mono text-[10px] text-[#bbb] transition-colors hover:text-[#888]"
+          >
+            Terminos
+          </a>
+          <a
+            href="/support"
+            className="font-mono text-[10px] text-[#bbb] transition-colors hover:text-[#888]"
+          >
+            Soporte
+          </a>
+        </div>
         <p className="font-mono text-[10px] tracking-wide text-[#bbb]">
-          V2.0
+          V2.0.0
         </p>
       </div>
     </aside>

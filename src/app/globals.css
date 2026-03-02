@@ -16,10 +16,42 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* iOS safe areas */
+:root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  padding-top: var(--sat);
+  padding-bottom: var(--sab);
+  padding-left: var(--sal);
+  padding-right: var(--sar);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  overscroll-behavior-y: none;
+}
+
+/* Disable iOS text selection on UI elements */
+button, a, nav, header, aside {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection on content areas */
+p, span, div, input, textarea {
+  -webkit-user-select: auto;
+  user-select: auto;
 }
 
 /* Subtle dashed grid background */
@@ -99,4 +131,30 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-muted);
+}
+
+/* iOS native input styles */
+input[type="number"],
+input[type="text"] {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 12px;
+  font-size: 16px; /* Prevents iOS zoom on focus */
+}
+
+/* iOS safe area for sticky mobile nav */
+.mobile-nav-safe {
+  padding-top: var(--sat);
+}
+
+/* iOS safe area for bottom content */
+.bottom-safe {
+  padding-bottom: max(16px, var(--sab));
+}
+
+/* Standalone mode specific styles (when added to home screen or Capacitor) */
+@media all and (display-mode: standalone) {
+  body {
+    overscroll-behavior: none;
+  }
 }

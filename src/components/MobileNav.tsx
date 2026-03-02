@@ -21,7 +21,7 @@ export default function MobileNav({ active, onChange }: MobileNavProps) {
   return (
     <div className="md:hidden">
       {/* Top bar */}
-      <header className="sticky top-0 z-50 flex items-center justify-between border-b border-black/[0.06] bg-white/80 px-4 py-3 backdrop-blur-xl">
+      <header className="mobile-nav-safe sticky top-0 z-50 flex items-center justify-between border-b border-black/[0.06] bg-white/80 px-4 py-3 backdrop-blur-xl">
         <div className="flex items-center gap-2.5">
           <div className="flex h-7 w-7 items-center justify-center rounded-md bg-[#0a0a0a] text-[11px] font-black text-white">
             F
